@@ -2,13 +2,11 @@ const createHttpError = require("http-errors");
 const uploadController = require("./uploadFile.controller");
 const deleteController = require("./deleteFile.controller");
 const FilesModel = require("../Models/file.model");
-
 module.exports = {
   uploadFile: async (req, res, next) => {
     try {
       const storageBox = req.params.cloud;
       const dataFile = req.file;
-
       switch (storageBox) {
         case "cloudinary":
           const cloudinary = await uploadController.cloudinary(dataFile);
@@ -87,8 +85,6 @@ module.exports = {
           );
       }
       console.log(body);
-      const deleteData = await deleteController.cloudinary;
-      console.log(deleteData);
     } catch (err) {
       next(err);
     }
